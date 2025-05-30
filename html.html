@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gantungan Kunci Custom & Galeri Ilustrasi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* General Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Outfit', sans-serif;
+    }
+    body {
+      background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+      color: #343a40;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      line-height: 1.6;
+    }
+    main {
+      width: 100%;
+      max-width: 1200px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      background-color: #ffffff;
+      margin: 0;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      background: #0a2463; /* Navy blue */
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      color: white;
+      transition: all 0.3s ease;
+      padding: 0.5rem;
+      border-radius: 8px;
+    }
+    
+    .nav-links a:hover {
+      background-color: rgba(255,255,255,0.1);
+      text-decoration: none;
+      transform: translateY(-2px);
+    }
+    
+    /* Style khusus untuk tombol Order Sekarang */
+    .nav-links .order-now {
+      background-color: #FF6B6B;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(255,107,107,0.3);
+    }
+    
+    .nav-links .order-now:hover {
+      background-color: #ff5252;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 15px rgba(255,107,107,0.4);
+    }
+    
+    .hamburger {
+      display: none;
+      cursor: pointer;
+    }
+    
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 5px;
+      transition: all 0.3s ease;
+    }
+
+    /* New Hero Section */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4rem 2rem;
+      background: linear-gradient(135deg, #0a2463 0%, #3a7bd5 100%);
+      color: white;
+      text-align: left;
+    }
+    
+    .hero-content {
+      flex: 1;
+      padding-right: 10rem;
+    }
+    
+    .hero-image {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    
+    .hero-image img {
+      max-width:70%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      transition: all 0.5s ease;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    
+    .highlight {
+      color: #FFD700;
+    }
+    
+    header p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cta-button {
+      background: #FF6B6B;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 700;
+      display: inline-block;
+      margin-top: 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255,107,107,0.4);
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(255,107,107,0.6);
+      text-decoration: none;
+      animation: none;
+    }
+
+    /* Container for sections */
+    .container {
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    /* Section Styles */
+    section {
+      width: 100%;
+      max-width: 900px;
+      padding: 2.5rem;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(10,36,99,0.1);
+      text-align: center;
+      border: 1px solid #e0e0e0;
+      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    section:hover {
+      transform: translateY(-5px);
+    }
+    
+    section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #0a2463, #3a7bd5, #FF6B6B);
+      animation: rainbow 5s linear infinite;
+    }
+    
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    
+    section h2 {
+      font-size: 2rem;
+      color: #0a2463;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+    section h3 {
+      margin-top: 1.5rem;
+      font-size: 1.3rem;
+      color: #1e3d8b;
+      font-weight: 600;
+    }
+    ul, ol {
+      text-align: left;
+      display: inline-block;
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+    }
+    ul li, ol li {
+      margin-bottom: 0.6rem;
+      font-size: 1.05rem;
+      color: #495057;
+    }
+    ol {
+      list-style-type: decimal;
+    }
+
+    /* Gallery Styles */
+    .gallery-wrapper {
+      display: flex;
+      overflow-x: auto;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 1rem;
+    }
+    .gallery-wrapper::-webkit-scrollbar {
+      height: 8px;
+    }
+    .gallery-wrapper::-webkit-scrollbar-thumb {
+      background: #0a2463;
+      border-radius: 4px;
+    }
+    .gallery-wrapper img {
+      flex: 0 0 auto;
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 16px;
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 20px rgba(10,36,99,0.1);
+      scroll-snap-align: center;
+      border: 2px solid #e0e0e0;
+    }
+    .gallery-wrapper img:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 12px 25px rgba(10,36,99,0.2);
+      border-color: #0a2463;
+    }
+
+    /* Improved Auto-Scrolling Gallery */
+    .auto-scroll-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      margin-top: 1.5rem;
+    }
+    
+    .auto-scroll-gallery {
+      display: flex;
+      width: max-content;
+      animation: scrollGallery 30s linear infinite;
+    }
+    
+    .auto-scroll-gallery img {
+      width: 250px;
+      height: 250px;
+      margin-right: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(10,36,99,0.1);
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid #e0e0e0;
+    }
+    
+    @keyframes scrollGallery {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    
+    .auto-scroll-gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(10,36,99,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-color: #0a2463;
+    }
+    
+    .auto-scroll-container::before,
+    .auto-scroll-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    
+    .auto-scroll-container::before {
+      left: 0;
+      background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0) 100%);
+    }
+    
+    .auto-scroll-container::after {
+      right: 0;
+      background: linear-gradient(to left, #ffffff 0%, rgba(255,255,255,0) 100%);
+    }
+
+    /* Sketch Paper Section */
+    .sketch-paper {
+      background: #ffffff;
+      box-shadow: 0 6px 25px rgba(10,36,99,0.1);
+      padding: 2.5rem;
+      border: 1px solid #e0e0e0;
+    }
+    
+    .sketch-example {
+      margin: 2rem auto;
+      width: 300px;
+      height: 300px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      position: relative;
+      animation: sketchFloat 4s ease-in-out infinite;
+    }
+    
+    @keyframes sketchFloat {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+    
+    .sketch-example img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .sketch-example:hover img {
+      transform: scale(1.05);
+    }
+    
+    .sketch-paper h2 {
+      color: #0a2463;
+      margin-bottom: 1.2rem;
+    }
+    .sketch-paper h3 {
+      color: #1a3a8f;
+      margin-bottom: 0.8rem;
+    }
+    .sketch-paper ul {
+      margin-bottom: 1.8rem;
+    }
+    .sketch-paper p {
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+      color: #495057;
+    }
+    .sketch-paper strong {
+        color: #1a3a8f;
+        font-weight: 700;
+    }
+    .sketch-paper .price-list {
+      width: 100%;
+      max-width: 500px;
+      margin: 1.5rem auto;
+      border-collapse: collapse;
+    }
+    .sketch-paper .price-list th, 
+    .sketch-paper .price-list td {
+      padding: 0.8rem;
+      border: 1px solid #e0e0e0;
+      text-align: left;
+    }
+    .sketch-paper .price-list th {
+      background-color: #0a2463;
+      color: white;
+    }
+    .sketch-paper .price-list tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    /* Open Commission Section */
+    .open-commission {
+      background: #f8f9fa;
+      box-shadow: 0 8px 30px rgba(10,36,99,0.1);
+      padding: 2.5rem;
+      border: 1px solid #e0e0e0;
+    }
+    
+    .keychain-example {
+      margin: 2rem auto;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      position: relative;
+      animation: spin 15s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .keychain-example:hover {
+      animation: spin 3s linear infinite;
+    }
+    
+    .keychain-example img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .open-commission h2 {
+      color: #0a2463;
+      margin-bottom: 1.2rem;
+    }
+    .open-commission h3 {
+      color: #1a3a8f;
+      margin-bottom: 0.8rem;
+    }
+    .open-commission ul {
+      margin-bottom: 1.8rem;
+    }
+    .open-commission p {
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+      color: #495057;
+    }
+    .open-commission strong {
+        color: #1a3a8f;
+        font-weight: 700;
+    }
+    .open-commission .contact-info a {
+      font-weight: 600;
+      color: #0a2463;
+      transition: color 0.3s ease;
+    }
+    .open-commission .contact-info a:hover {
+      color: #0d3b8c;
+    }
+
+    /* How to Order Section */
+    .cara-order {
+      background: #f1f3f5;
+      box-shadow: 0 6px 25px rgba(10,36,99,0.1);
+      padding: 2rem;
+      margin-top: 2.5rem;
+      border: 1px solid #e0e0e0;
+    }
+    .cara-order h2 {
+      color: #1a3a8f;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Promo Text */
+    .promo-text {
+      font-weight: 700;
+      color: #1a3a8f;
+      margin-top: 1.5rem;
+      font-size: 1.15rem;
+      border: 2px dashed #0a2463;
+      border-radius: 10px;
+      display: inline-block;
+      padding: 1rem 1.5rem;
+      background-color: #f8f9fa;
+      animation: shake 0.5s ease infinite alternate;
+    }
+    
+    @keyframes shake {
+      from { transform: rotate(-2deg); }
+      to { transform: rotate(2deg); }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #0a2463;
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      body {
+        padding: 0;
+      }
+      
+      .navbar {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 0;
+      }
+      
+      .nav-links.active {
+        display: flex;
+      }
+      
+      .nav-links a {
+        padding: 1rem;
+        border-top: 1px solid rgba(255,255,255,0.1);
+      }
+      
+      .nav-links .order-now {
+        margin-top: 1rem;
+        text-align: center;
+      }
+      
+      .hamburger {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 1.5rem;
+      }
+      
+      .hamburger.active div:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+      }
+      
+      .hamburger.active div:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .hamburger.active div:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+      }
+      
+      header {
+        flex-direction: column;
+        padding: 2rem 1rem;
+        text-align: center;
+      }
+      
+      .hero-content {
+        padding-right: 0;
+        margin-bottom: 2rem;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      header p {
+        font-size: 1rem;
+      }
+      
+      .container {
+        padding: 2rem 1rem;
+        gap: 1.5rem;
+      }
+      
+      section {
+        padding: 1.5rem;
+      }
+      
+      section h2 {
+        font-size: 1.5rem;
+      }
+      
+      section h3 {
+        font-size: 1.1rem;
+      }
+      
+      .gallery-wrapper img {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .auto-scroll-gallery img {
+        width: 180px;
+        height: 180px;
+        margin-right: 1rem;
+      }
+      
+      .auto-scroll-container::before,
+      .auto-scroll-container::after {
+        width: 50px;
+      }
+      
+      .sketch-paper .price-list th, 
+      .sketch-paper .price-list td {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+      }
+      
+      .sketch-example {
+        width: 200px;
+        height: 200px;
+      }
+      
+      .keychain-example {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="logo">Likalikuilan</div>
+      <div class="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="nav-links">
+        <a href="#gallery">Galeri</a>
+        <a href="#sketch">Sketsa Kertas</a>
+        <a href="#commission">Keychain Custom</a>
+        <a href="#cara-order" class="order-now">Order Sekarang!</a>
+      </div>
+    </nav>
+
+    <header>
+      <div class="hero-content">
+        <h1>OPEN COMMISSION <span class="highlight">Keychain Custom & Sketsa Gambar</span></h1>
+        <p>Karena tak semua hal bisa diungkapkan dengan kata-kata, biarlah gambar bercerita. Biarlah sketsa jadi suara hatimu.</p>
+        <a href="#cara-order" class="cta-button">Pesan Sekarang</a>
+      </div>
+      <div class="hero-image">
+        <img src="image/cooo.jpg" alt="Contoh Gantungan Kunci Custom">
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="gallery">
+        <div class="auto-scroll-container">
+          <div class="auto-scroll-gallery">
+            <img src="image/we.jpg" alt="Karya Ilustrasi Custom 1" />
+            <img src="image/co.jpg" alt="Karya Ilustrasi Custom 2" />
+            <img src="image/w.jpg" alt="Karya Ilustrasi Custom 3" />
+            <img src="image/coo.jpg" alt="Karya Ilustrasi Custom 4" />
+            <img src="omo/girl.jpg" alt="Karya Ilustrasi Custom 5" />
+            <img src="image/cooo.jpg" alt="Karya Ilustrasi Custom 6" />
+            <img src="omo/anime.jpg" alt="Karya Ilustrasi Custom 7" />
+            <img src="image/we.jpg" alt="Karya Ilustrasi Custom 1" />
+            <img src="image/co.jpg" alt="Karya Ilustrasi Custom 2" />
+            <img src="image/w.jpg" alt="Karya Ilustrasi Custom 3" />
+            <img src="image/coo.jpg" alt="Karya Ilustrasi Custom 4" />
+            <img src="omo/girl.jpg" alt="Karya Ilustrasi Custom 5" />
+            <img src="image/cooo.jpg" alt="Karya Ilustrasi Custom 6" />
+            <img src="omo/anime.jpg" alt="Karya Ilustrasi Custom 7" />
+          </div>
+        </div>
+      </section>
+
+      <!-- New Sketch Paper Section -->
+      <section class="sketch-paper" id="sketch">
+        <h2>🎨 GAMBAR SKETSA KERTAS A4 🎨</h2>
+        <p>Selain gantungan kunci custom, saya juga menerima pesanan <strong>gambar sketsa di kertas A4</strong> dengan berbagai gaya dan tema.</p>
+        
+        <!-- Added example photo for sketch -->
+        <div class="sketch-example">
+          <img src="image/caca.jpg" alt="Contoh Sketsa Kertas">
+        </div>
+        
+        <h3>Detail Produk:</h3>
+        <ul>
+          <li><strong>Ukuran:</strong> Kertas A4 (21 x 29.7 cm)</li>
+          <li><strong>Media:</strong> Menggunakan pensil grafit & pensil mekanik</li>
+          <li><strong>Bahan:</strong> Kertas sketchbook berkualitas tinggi (200gsm)</li>
+          <li><strong>Frame:</strong> Tanpa frame (opsional frame dengan harga tambahan)</li>
+        </ul>
+
+        <h3>Daftar Harga:</h3>
+        <table class="price-list">
+          <thead>
+            <tr>
+              <th>Jenis Sketsa</th>
+              <th>Harga Mulai</th>
+              <th>Estimasi Pengerjaan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sketsa Wajah - Style art sendiri (Hitam Putih)</td>
+              <td>Rp 30.000</td>
+              <td>3-6 hari</td>
+            </tr>
+            <tr>
+              <td>Sketsa Karakter (Anime/Cartoon)</td>
+              <td>Rp 35.000</td>
+              <td>3-4 hari</td>
+            </tr>
+            <tr>
+              <td>Sketsa hewan - Style art sendir(Hitam putih)</td>
+              <td>Rp 25.000</td>
+              <td>3-5 hari</td>
+            </tr>
+            
+          </tbody>
+        </table>
+
+        <h3>Proses Pemesanan:</h3>
+        <ol>
+          <li>Kirimkan referensi gambar yang ingin dijadikan sketsa</li>
+          <li>Tentukan jenis sketsa yang diinginkan</li>
+          <li>Kami akan memberikan preview sketsa sebelum finalisasi</li>
+          <li>Setelah disetujui, sketsa akan dikirim dalam keadaan aman (dilapisi protective sheet)</li>
+        </ol>
+      
+        <h4>Seputar gambar</h4>
+        <p>Lihat berbagai gaya ilustrasi yang pernah kami buat.</p>
+        <div class="gallery-wrapper">
+          <img src="omo/cat.jpg" alt="Ilustrasi Ahlan 3" />
+          <img src="omo/cattt.jpg" alt="Ilustrasi Sipan 2" />
+          <img src="omo/catttt.jpg" alt="Ilustrasi Sipan 3" />
+          <img src="omo/cattttt.jpg" alt="Ilustrasi Sipan 3" />
+        </div>
+
+        <p class="contact-info">
+          Untuk pemesanan atau pertanyaan lebih lanjut:<br />
+          WhatsApp: <a href="https://wa.me/6285888526072" target="_blank"><strong>+62 858-8852-6072</strong></a><br />
+          Instagram: <a href="https://instagram.com/mfirm4ann" target="_blank"><strong>@mfirm4ann</strong></a>
+        </p>
+      </section>
+
+      <section class="open-commission" id="commission">
+        <h2>✨ KEYCHAIN CUSTOM! ✨</h2>
+        <p>Lagi nyari gantungan kunci yang unik dan mencerminkan dirimu? Atau buat hadiah spesial?</p>
+        <p>Aku buka jasa bikin <strong>keychain custom</strong> nih, bisa request suka-suka!</p>
+
+        <!-- Added example photo for keychain -->
+        <div class="keychain-example">
+          <img src="image/co.jpg" alt="Contoh Gantungan Kunci Custom">
+        </div>
+
+        <h3>Apa yang bisa kamu request?</h3>
+        
+        <ul>
+          <li><strong>Ilustrasi personal:</strong> Foto kamu, teman, pasangan, bahkan hewan peliharaan kesayanganmu.</li>
+          <li><strong>Karakter favorit:</strong> Husbu/Waifu, karakter anime, game, atau idolamu.</li>
+          <li><strong>Desain bebas:</strong> Punya ide unik? Aku bantu wujudkan jadi ilustrasi yang keren!</li>
+        </ul>
+
+        <h3>Spesifikasi Gantungan Kunci:</h3>
+        <ul>
+          <li>Bahan: <strong>Akrilik tebal & berkualitas tinggi</strong>, tahan bantung dan awet.</li>
+          <li>Ukuran & bentuk: <strong>Fleksibel</strong>, bentuk love ukuran 5cm.</li>
+        </ul>
+
+        <h3>Harga & Proses:</h3>
+        <p><strong>Harga mulai dari Rp 15.000 - Rp 20.000</strong> (disesuaikan dengan tingkat kerumitan desain & ukuran).</p>
+        <p>Proses pengerjaan cepat, hanya <strong>3–5 hari kerja</strong>!</p>
+
+        <hr /> 
+        <section class="cara-order" id="cara-order">
+          <h2>Bagaimana Cara Ordernya?</h2>
+          <ol>
+            <li>Hubungi saya langsung lewat <strong>WhatsApp</strong> atau <strong>Instagram</strong>.</li>
+            <li>Sampaikan ide, foto, atau desain yang kamu inginkan untuk gantungan kunci.</li>
+            <li>Kita akan konsultasi untuk menyesuaikan ukuran, bentuk, dan jenis akrilik.</li>
+            <li>Setelah desain final disepakati, saya akan mengirimkan <strong>preview desain</strong> untuk konfirmasi.</li>
+            <li>Lakukan pembayaran sesuai harga yang disepakati.</li>
+            <li>Gantungan kunci custom-mu akan aku proses dan siap dikirim dalam <strong>3-5 hari kerja</strong>!</li>
+          </ol>
+        </section>
+        
+
+        <h3>Yuk, Pesan Sekarang!</h3>
+        <p class="contact-info">
+          WhatsApp: <a href="https://wa.me/6285888526072" target="_blank"><strong>+62 858-8852-6072</strong></a><br />
+          Instagram: <a href="https://instagram.com/mfirm4ann" target="_blank"><strong>@mfirm4ann</strong></a>
+        </p>
+          <strong>⚠️INFORMASI COD⚠️</strong> <br />
+          Barang Akan dikirim di <strong>Hari Libur</strong>, dan hanya di sekitar<br />
+          <strong> CICURUG - CARINGIN</strong> buruan sikat!
+        </p>
+
+        
+
+        <p class="promo-text">
+          🔥 <strong>PROMO SPESIAL!</strong> 🔥<br />
+          Hanya untuk <strong>5 orang pertama</strong>, dapatkan harga super spesial!<br />
+          Jangan sampai ketinggalan, buruan sikat!
+        </p>
+ 
+        <h3>✏️ Thank You For Your Order! ✏️</h3>
+        <p></p>
+        <div class="gallery-wrapper">
+          <img src="image/1.jpg" alt="Gaya Ilustrasi Unik 1" />
+          <img src="image/pro.jpg" alt="Gaya Ilustrasi Unik 2" />
+          <img src="image/2.jpg" alt="Gaya Ilustrasi Unik 3" />
+          <img src="image/pro2.jpg" alt="Gaya Ilustrasi Unik 4" />
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <p>© 2025 Web Komisi Gantungan Kunci & Galeri Ilustrasi.</p>
+    </footer>
+  </main>
+
+  <script>
+    // Hamburger menu functionality
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+    
+    // Close menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+        
+        // Smooth scroll to section
+        if(link.hash) {
+          event.preventDefault();
+          const target = document.querySelector(link.hash);
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Add confetti effect when clicking CTA button
+    const ctaButton = document.querySelector('.cta-button');
+    ctaButton.addEventListener('click', (e) => {
+      if (!e.target.href.includes('#')) return;
+      
+      // Create confetti elements
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.position = 'fixed';
+        confetti.style.width = '10px';
+        confetti.style.height = '10px';
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        confetti.style.borderRadius = '50%';
+        confetti.style.left = `${Math.random() * 100}vw`;
+        confetti.style.top = '0';
+        confetti.style.zIndex = '1000';
+        confetti.style.pointerEvents = 'none';
+        document.body.appendChild(confetti);
+        
+        // Animate confetti
+        const animation = confetti.animate([
+          { top: '0', opacity: 1, transform: 'scale(1)' },
+          { top: '100vh', opacity: 0, transform: 'scale(0.5)' }
+        ], {
+          duration: 1000 + Math.random() * 2000,
+          easing: 'cubic-bezier(0.1, 0.8, 0.9, 1)'
+        });
+        
+        // Remove confetti after animation
+        animation.onfinish = () => confetti.remove();
+      }
+    });
+  </script>
+</body>
+</html>
